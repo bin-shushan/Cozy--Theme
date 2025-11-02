@@ -1,0 +1,32 @@
+{% extends "layouts/master" %}
+
+{% block content %}
+<div class="page-customer-wishlist">
+    <div class="container">
+        {# Page Header #}
+        <div class="page-header">
+            <h1 class="page-title">{{ trans('pages.profile.wishlist') }}</h1>
+        </div>
+
+        {# Wishlist Content #}
+        <div class="wishlist-content">
+            {# Empty Wishlist #}
+            <div class="empty-wishlist" style="display: none;">
+                <salla-icon name="heart" size="64"></salla-icon>
+                <h2>{{ trans('pages.wishlist.empty') }}</h2>
+                <p>{{ trans('pages.wishlist.empty_message') }}</p>
+                <a href="{{ link('product.index') }}" class="btn btn-primary">
+                    {{ trans('common.continue_shopping') }}
+                </a>
+            </div>
+
+            {# Wishlist Items #}
+            <div class="wishlist-items">
+                <salla-wishlist-items></salla-wishlist-items>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+

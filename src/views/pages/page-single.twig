@@ -1,0 +1,29 @@
+{% extends "layouts/master" %}
+
+{% block content %}
+<div class="page-single">
+    <div class="container">
+        {# Breadcrumb #}
+        <nav class="breadcrumb">
+            <salla-breadcrumb></salla-breadcrumb>
+        </nav>
+
+        {# Page Content #}
+        <article class="page-content">
+            <h1 class="page-title">{{ page.title }}</h1>
+            
+            {% if page.image %}
+                <div class="page-image">
+                    <img src="{{ page.image }}" alt="{{ page.title }}" loading="lazy">
+                </div>
+            {% endif %}
+            
+            <div class="page-body">
+                {{ page.content|raw }}
+            </div>
+        </article>
+    </div>
+</div>
+{% endblock %}
+
+

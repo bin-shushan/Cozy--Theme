@@ -1,0 +1,30 @@
+{
+  "name": "my-first-salla-theme",
+  "version": "1.0.0",
+  "description": "A modern Salla theme built with Twilight",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node server.js",
+    "preview": "node server.js",
+    "build": "echo 'Run: npx @salla.sa/cli theme build'",
+    "publish": "echo 'Run: npx @salla.sa/cli theme publish'",
+    "serve": "npx @salla.sa/cli theme serve",
+    "info": "echo 'Theme structure is correct and ready for Salla CLI'"
+  },
+  "keywords": [
+    "salla",
+    "theme",
+    "ecommerce",
+    "twilight"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "@salla.sa/twilight": "^2.0.0",
+    "express": "^4.18.2"
+  },
+  "dependencies": {
+    "@salla.sa/twilight-components": "^2.0.0"
+  }
+}
+

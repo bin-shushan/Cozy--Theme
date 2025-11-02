@@ -1,0 +1,54 @@
+{% extends "layouts/master" %}
+
+{% block content %}
+<div class="page-brands">
+    <div class="container">
+        {# Page Header #}
+        <div class="page-header">
+            <h1 class="page-title">{{ trans('pages.brands') }}</h1>
+            <salla-breadcrumb></salla-breadcrumb>
+        </div>
+
+        {# Brands Grid #}
+        <div class="brands-grid">
+            {% if brands %}
+                {% for brand in brands %}
+                    <div class="brand-card">
+                        <a href="{{ brand.url }}" title="{{ brand.name }}">
+                            <div class="brand-logo">
+                                <img src="{{ brand.logo }}" alt="{{ brand.name }}" loading="lazy">
+                            </div>
+                            <div class="brand-info">
+                                <h3 class="brand-name">{{ brand.name }}</h3>
+                                {% if brand.products_count %}
+                                    <span class="brand-count">
+                                        {{ brand.products_count }} {{ trans('common.products') }}
+                                    </span>
+                                {% endif %}
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="no-brands">
+                    <salla-icon name="box-open" size="64"></salla-icon>
+                    <h3>{{ trans('pages.no_brands_found') }}</h3>
+                </div>
+            {% endif %}
+        </div>
+
+        {# Pagination #}
+        {% if brands %}
+            <div class="brands-pagination">
+                <salla-pagination 
+                    total="{{ brands.total }}"
+                    per-page="{{ brands.per_page }}"
+                    current-page="{{ brands.current_page }}">
+                </salla-pagination>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+

@@ -1,0 +1,120 @@
+{% extends "layouts/master" %}
+
+{% block content %}
+<div class="page-products">
+    <div class="container">
+        {# Page Header #}
+        <div class="page-header">
+            <h1 class="page-title">{{ trans('pages.products') }}</h1>
+            <salla-breadcrumb></salla-breadcrumb>
+        </div>
+
+        <div class="products-wrapper">
+            {# Sidebar Filters #}
+            <aside class="products-sidebar">
+                <div class="sidebar-filters">
+                    {# Categories Filter #}
+                    <div class="filter-group">
+                        <h3 class="filter-title">{{ trans('common.categories') }}</h3>
+                        <salla-filter-categories></salla-filter-categories>
+                    </div>
+
+                    {# Price Filter #}
+                    <div class="filter-group">
+                        <h3 class="filter-title">{{ trans('common.price_range') }}</h3>
+                        <salla-filter-price></salla-filter-price>
+                    </div>
+
+                    {# Brands Filter #}
+                    <div class="filter-group">
+                        <h3 class="filter-title">{{ trans('common.brands') }}</h3>
+                        <salla-filter-brands></salla-filter-brands>
+                    </div>
+
+                    {# Ratings Filter #}
+                    <div class="filter-group">
+                        <h3 class="filter-title">{{ trans('common.ratings') }}</h3>
+                        <salla-filter-rating></salla-filter-rating>
+                    </div>
+
+                    {# Clear Filters #}
+                    <salla-button-clear-filters class="btn btn-outline-secondary btn-block">
+                        {{ trans('common.clear_filters') }}
+                    </salla-button-clear-filters>
+                </div>
+            </aside>
+
+            {# Products Content #}
+            <div class="products-main">
+                {# Products Toolbar #}
+                <div class="products-toolbar">
+                    <div class="toolbar-results">
+                        <span class="results-count">
+                            {{ trans('common.showing') }} 
+                            <strong>{{ products.from }}</strong> - 
+                            <strong>{{ products.to }}</strong> 
+                            {{ trans('common.of') }} 
+                            <strong>{{ products.total }}</strong> 
+                            {{ trans('common.products') }}
+                        </span>
+                    </div>
+
+                    <div class="toolbar-actions">
+                        {# Sort Options #}
+                        <salla-products-sorter></salla-products-sorter>
+
+                        {# View Mode Toggle #}
+                        <div class="view-mode-toggle">
+                            <button class="view-mode-btn active" data-view="grid">
+                                <salla-icon name="grid"></salla-icon>
+                            </button>
+                            <button class="view-mode-btn" data-view="list">
+                                <salla-icon name="list"></salla-icon>
+                            </button>
+                        </div>
+
+                        {# Mobile Filters Toggle #}
+                        <button class="mobile-filters-toggle btn btn-outline-primary">
+                            <salla-icon name="filter"></salla-icon>
+                            {{ trans('common.filters') }}
+                        </button>
+                    </div>
+                </div>
+
+                {# Active Filters #}
+                <div class="active-filters">
+                    <salla-active-filters></salla-active-filters>
+                </div>
+
+                {# Products Grid #}
+                <div class="products-grid" data-view="grid">
+                    {% if products.items %}
+                        {% for product in products.items %}
+                            {% include 'components.product.card' with {product: product} %}
+                        {% endfor %}
+                    {% else %}
+                        <div class="no-products">
+                            <salla-icon name="box-open" size="64"></salla-icon>
+                            <h3>{{ trans('pages.no_products_found') }}</h3>
+                            <p>{{ trans('pages.no_products_message') }}</p>
+                        </div>
+                    {% endif %}
+                </div>
+
+                {# Pagination #}
+                {% if products.items %}
+                    <div class="products-pagination">
+                        <salla-pagination 
+                            total="{{ products.total }}"
+                            per-page="{{ products.per_page }}"
+                            current-page="{{ products.current_page }}">
+                        </salla-pagination>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+

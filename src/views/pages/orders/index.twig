@@ -1,0 +1,72 @@
+{% extends "layouts/master" %}
+
+{% block content %}
+<div class="page-orders">
+    <div class="container">
+        {# Page Header #}
+        <div class="page-header">
+            <h1 class="page-title">{{ trans('pages.orders') }}</h1>
+        </div>
+
+        {# Orders Content #}
+        <div class="orders-content">
+            {# Empty Orders #}
+            <div class="empty-orders" style="display: none;">
+                <salla-icon name="shopping-bag" size="64"></salla-icon>
+                <h2>{{ trans('pages.orders.empty') }}</h2>
+                <p>{{ trans('pages.orders.empty_message') }}</p>
+                <a href="{{ link('product.index') }}" class="btn btn-primary">
+                    {{ trans('common.start_shopping') }}
+                </a>
+            </div>
+
+            {# Orders List #}
+            <div class="orders-list">
+                {% if orders %}
+                    {% for order in orders %}
+                        <div class="order-card">
+                            <div class="order-header">
+                                <div class="order-number">
+                                    <strong>{{ trans('pages.orders.order_number') }}:</strong> {{ order.id }}
+                                </div>
+                                <div class="order-status">
+                                    <span class="badge badge-{{ order.status }}">{{ order.status_name }}</span>
+                                </div>
+                            </div>
+                            <div class="order-body">
+                                <div class="order-info">
+                                    <div class="order-date">
+                                        <salla-icon name="calendar"></salla-icon>
+                                        {{ order.created_at|date('M d, Y') }}
+                                    </div>
+                                    <div class="order-total">
+                                        <strong>{{ trans('pages.orders.total') }}:</strong> {{ order.total|money }}
+                                    </div>
+                                </div>
+                                <div class="order-actions">
+                                    <a href="{{ order.url }}" class="btn btn-outline-primary">
+                                        {{ trans('pages.orders.view_details') }}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            {# Pagination #}
+            {% if orders %}
+                <div class="orders-pagination">
+                    <salla-pagination 
+                        total="{{ orders.total }}"
+                        per-page="{{ orders.per_page }}"
+                        current-page="{{ orders.current_page }}">
+                    </salla-pagination>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+

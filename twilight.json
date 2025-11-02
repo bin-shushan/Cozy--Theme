@@ -1,0 +1,330 @@
+{
+  "name": "My First Salla Theme",
+  "version": "1.0.0",
+  "description": {
+    "ar": "ثيم حديث ومتجاوب لمتاجر سلة",
+    "en": "A modern and responsive theme for Salla stores"
+  },
+  "author": {
+    "name": "Your Name",
+    "email": "your.email@example.com",
+    "url": "https://yourwebsite.com"
+  },
+  "support": {
+    "email": "support@example.com",
+    "url": "https://yourwebsite.com/support",
+    "phone": "+966XXXXXXXXX"
+  },
+  "preview": {
+    "home": "images/screenshots/home.png",
+    "product": "images/screenshots/product.png",
+    "cart": "images/screenshots/cart.png",
+    "mobile": "images/screenshots/mobile.png"
+  },
+  "thumbnail": "images/thumbnail.png",
+  "screenshots": [
+    "images/screenshots/home.png",
+    "images/screenshots/product.png",
+    "images/screenshots/cart.png",
+    "images/screenshots/checkout.png",
+    "images/screenshots/mobile.png"
+  ],
+  "tags": [
+    "modern",
+    "responsive",
+    "rtl",
+    "ecommerce",
+    "minimal",
+    "clean"
+  ],
+  "categories": [
+    "fashion",
+    "electronics",
+    "general"
+  ],
+  "price": 0,
+  "settings": {
+    "colors": {
+      "primary": {
+        "type": "color",
+        "label": {
+          "ar": "اللون الأساسي",
+          "en": "Primary Color"
+        },
+        "default": "#4A90E2"
+      },
+      "secondary": {
+        "type": "color",
+        "label": {
+          "ar": "اللون الثانوي",
+          "en": "Secondary Color"
+        },
+        "default": "#7B68EE"
+      },
+      "success": {
+        "type": "color",
+        "label": {
+          "ar": "لون النجاح",
+          "en": "Success Color"
+        },
+        "default": "#28a745"
+      },
+      "danger": {
+        "type": "color",
+        "label": {
+          "ar": "لون التنبيه",
+          "en": "Danger Color"
+        },
+        "default": "#dc3545"
+      }
+    },
+    "typography": {
+      "primary_font": {
+        "type": "select",
+        "label": {
+          "ar": "الخط الأساسي",
+          "en": "Primary Font"
+        },
+        "default": "Cairo",
+        "options": [
+          {"value": "Cairo", "label": "Cairo"},
+          {"value": "Almarai", "label": "Almarai"},
+          {"value": "Tajawal", "label": "Tajawal"},
+          {"value": "Roboto", "label": "Roboto"},
+          {"value": "Open Sans", "label": "Open Sans"}
+        ]
+      },
+      "font_size": {
+        "type": "range",
+        "label": {
+          "ar": "حجم الخط",
+          "en": "Font Size"
+        },
+        "default": 16,
+        "min": 12,
+        "max": 20,
+        "step": 1,
+        "unit": "px"
+      }
+    },
+    "layout": {
+      "container_width": {
+        "type": "range",
+        "label": {
+          "ar": "عرض الحاوية",
+          "en": "Container Width"
+        },
+        "default": 1200,
+        "min": 1000,
+        "max": 1600,
+        "step": 50,
+        "unit": "px"
+      },
+      "header_style": {
+        "type": "select",
+        "label": {
+          "ar": "نمط الهيدر",
+          "en": "Header Style"
+        },
+        "default": "default",
+        "options": [
+          {"value": "default", "label": {"ar": "افتراضي", "en": "Default"}},
+          {"value": "centered", "label": {"ar": "وسط", "en": "Centered"}},
+          {"value": "minimal", "label": {"ar": "بسيط", "en": "Minimal"}}
+        ]
+      },
+      "show_top_bar": {
+        "type": "boolean",
+        "label": {
+          "ar": "إظهار الشريط العلوي",
+          "en": "Show Top Bar"
+        },
+        "default": true
+      }
+    },
+    "homepage": {
+      "show_categories": {
+        "type": "boolean",
+        "label": {
+          "ar": "إظهار الفئات",
+          "en": "Show Categories"
+        },
+        "default": true
+      },
+      "show_brands": {
+        "type": "boolean",
+        "label": {
+          "ar": "إظهار العلامات التجارية",
+          "en": "Show Brands"
+        },
+        "default": true
+      },
+      "show_blog": {
+        "type": "boolean",
+        "label": {
+          "ar": "إظهار المدونة",
+          "en": "Show Blog"
+        },
+        "default": true
+      },
+      "featured_products_count": {
+        "type": "range",
+        "label": {
+          "ar": "عدد المنتجات المميزة",
+          "en": "Featured Products Count"
+        },
+        "default": 8,
+        "min": 4,
+        "max": 12,
+        "step": 2
+      }
+    },
+    "product_card": {
+      "show_quick_view": {
+        "type": "boolean",
+        "label": {
+          "ar": "إظهار العرض السريع",
+          "en": "Show Quick View"
+        },
+        "default": true
+      },
+      "show_wishlist": {
+        "type": "boolean",
+        "label": {
+          "ar": "إظهار المفضلة",
+          "en": "Show Wishlist"
+        },
+        "default": true
+      },
+      "show_rating": {
+        "type": "boolean",
+        "label": {
+          "ar": "إظهار التقييم",
+          "en": "Show Rating"
+        },
+        "default": true
+      }
+    },
+    "social_links": {
+      "facebook": {
+        "type": "text",
+        "label": {
+          "ar": "فيسبوك",
+          "en": "Facebook"
+        },
+        "default": ""
+      },
+      "twitter": {
+        "type": "text",
+        "label": {
+          "ar": "تويتر",
+          "en": "Twitter"
+        },
+        "default": ""
+      },
+      "instagram": {
+        "type": "text",
+        "label": {
+          "ar": "إنستقرام",
+          "en": "Instagram"
+        },
+        "default": ""
+      },
+      "youtube": {
+        "type": "text",
+        "label": {
+          "ar": "يوتيوب",
+          "en": "YouTube"
+        },
+        "default": ""
+      },
+      "snapchat": {
+        "type": "text",
+        "label": {
+          "ar": "سناب شات",
+          "en": "Snapchat"
+        },
+        "default": ""
+      },
+      "tiktok": {
+        "type": "text",
+        "label": {
+          "ar": "تيك توك",
+          "en": "TikTok"
+        },
+        "default": ""
+      }
+    },
+    "custom_code": {
+      "custom_css": {
+        "type": "textarea",
+        "label": {
+          "ar": "كود CSS مخصص",
+          "en": "Custom CSS"
+        },
+        "default": ""
+      },
+      "custom_js": {
+        "type": "textarea",
+        "label": {
+          "ar": "كود JavaScript مخصص",
+          "en": "Custom JavaScript"
+        },
+        "default": ""
+      },
+      "header_scripts": {
+        "type": "textarea",
+        "label": {
+          "ar": "سكريبتات الهيدر",
+          "en": "Header Scripts"
+        },
+        "default": "",
+        "description": {
+          "ar": "سيتم إضافة هذا الكود في قسم <head>",
+          "en": "This code will be added to <head> section"
+        }
+      },
+      "footer_scripts": {
+        "type": "textarea",
+        "label": {
+          "ar": "سكريبتات الفوتر",
+          "en": "Footer Scripts"
+        },
+        "default": "",
+        "description": {
+          "ar": "سيتم إضافة هذا الكود قبل </body>",
+          "en": "This code will be added before </body>"
+        }
+      }
+    }
+  },
+  "features": [
+    "responsive",
+    "rtl_support",
+    "multi_language",
+    "seo_optimized",
+    "fast_loading",
+    "product_quick_view",
+    "wishlist",
+    "cart_drawer",
+    "search_autocomplete",
+    "product_reviews",
+    "social_sharing",
+    "newsletter",
+    "blog_support",
+    "brands_support",
+    "loyalty_program",
+    "mobile_optimized",
+    "accessibility",
+    "lazy_loading"
+  ],
+  "compatible_with": {
+    "salla_version": ">=2.0.0",
+    "twilight_version": ">=2.0.0"
+  },
+  "demo_url": "https://demo.yourtheme.com",
+  "documentation_url": "https://docs.yourtheme.com",
+  "changelog_url": "https://yourtheme.com/changelog"
+}
+
+

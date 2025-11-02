@@ -1,0 +1,61 @@
+{% extends "layouts/master" %}
+
+{% block content %}
+<div class="page-brand-single">
+    <div class="container">
+        {# Breadcrumb #}
+        <nav class="breadcrumb">
+            <salla-breadcrumb></salla-breadcrumb>
+        </nav>
+
+        {# Brand Header #}
+        <div class="brand-header">
+            <div class="brand-logo">
+                <img src="{{ brand.logo }}" alt="{{ brand.name }}" loading="lazy">
+            </div>
+            <div class="brand-info">
+                <h1 class="brand-name">{{ brand.name }}</h1>
+                {% if brand.description %}
+                    <p class="brand-description">{{ brand.description }}</p>
+                {% endif %}
+                {% if brand.products_count %}
+                    <p class="brand-count">
+                        {{ brand.products_count }} {{ trans('common.products') }}
+                    </p>
+                {% endif %}
+            </div>
+        </div>
+
+        {# Brand Products #}
+        <section class="brand-products">
+            <h2 class="section-title">{{ trans('pages.brand_products') }}</h2>
+            
+            <div class="products-grid">
+                {% if brand.products %}
+                    {% for product in brand.products %}
+                        {% include 'components.product.card' with {product: product} %}
+                    {% endfor %}
+                {% else %}
+                    <div class="no-products">
+                        <salla-icon name="box-open" size="64"></salla-icon>
+                        <h3>{{ trans('pages.no_products_found') }}</h3>
+                    </div>
+                {% endif %}
+            </div>
+
+            {# Pagination #}
+            {% if brand.products %}
+                <div class="products-pagination">
+                    <salla-pagination 
+                        total="{{ brand.products.total }}"
+                        per-page="{{ brand.products.per_page }}"
+                        current-page="{{ brand.products.current_page }}">
+                    </salla-pagination>
+                </div>
+            {% endif %}
+        </section>
+    </div>
+</div>
+{% endblock %}
+
+

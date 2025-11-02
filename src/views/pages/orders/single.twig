@@ -1,0 +1,105 @@
+{% extends "layouts/master" %}
+
+{% block content %}
+<div class="page-order-single">
+    <div class="container">
+        {# Breadcrumb #}
+        <nav class="breadcrumb">
+            <salla-breadcrumb></salla-breadcrumb>
+        </nav>
+
+        {# Order Header #}
+        <div class="order-header">
+            <div>
+                <h1 class="page-title">{{ trans('pages.orders.order_number') }}: {{ order.id }}</h1>
+                <p class="order-date">{{ trans('pages.orders.placed_on') }} {{ order.created_at|date('F d, Y') }}</p>
+            </div>
+            <div class="order-status-badge">
+                <span class="badge badge-{{ order.status }} badge-lg">{{ order.status_name }}</span>
+            </div>
+        </div>
+
+        <div class="order-details">
+            {# Order Items #}
+            <div class="order-section">
+                <h2 class="section-title">{{ trans('pages.orders.items') }}</h2>
+                <div class="order-items">
+                    {% for item in order.items %}
+                        <div class="order-item">
+                            <div class="item-image">
+                                <img src="{{ item.product.image }}" alt="{{ item.product.name }}" loading="lazy">
+                            </div>
+                            <div class="item-details">
+                                <h3 class="item-name">{{ item.product.name }}</h3>
+                                {% if item.options %}
+                                    <p class="item-options">{{ item.options }}</p>
+                                {% endif %}
+                                <p class="item-quantity">{{ trans('common.quantity') }}: {{ item.quantity }}</p>
+                            </div>
+                            <div class="item-price">
+                                <span class="price">{{ item.total|money }}</span>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            {# Order Summary #}
+            <div class="order-section">
+                <h2 class="section-title">{{ trans('pages.orders.summary') }}</h2>
+                <div class="order-summary">
+                    <div class="summary-row">
+                        <span>{{ trans('pages.cart.subtotal') }}</span>
+                        <span>{{ order.subtotal|money }}</span>
+                    </div>
+                    {% if order.shipping %}
+                        <div class="summary-row">
+                            <span>{{ trans('pages.cart.shipping') }}</span>
+                            <span>{{ order.shipping|money }}</span>
+                        </div>
+                    {% endif %}
+                    {% if order.tax %}
+                        <div class="summary-row">
+                            <span>{{ trans('pages.cart.tax') }}</span>
+                            <span>{{ order.tax|money }}</span>
+                        </div>
+                    {% endif %}
+                    {% if order.discount %}
+                        <div class="summary-row discount">
+                            <span>{{ trans('pages.cart.discount') }}</span>
+                            <span>-{{ order.discount|money }}</span>
+                        </div>
+                    {% endif %}
+                    <div class="summary-row summary-total">
+                        <strong>{{ trans('pages.cart.total') }}</strong>
+                        <strong>{{ order.total|money }}</strong>
+                    </div>
+                </div>
+            </div>
+
+            {# Shipping Information #}
+            {% if order.shipping_address %}
+                <div class="order-section">
+                    <h2 class="section-title">{{ trans('pages.orders.shipping_address') }}</h2>
+                    <div class="address-info">
+                        <p><strong>{{ order.shipping_address.name }}</strong></p>
+                        <p>{{ order.shipping_address.street }}</p>
+                        <p>{{ order.shipping_address.city }}, {{ order.shipping_address.country }}</p>
+                        <p>{{ order.shipping_address.phone }}</p>
+                    </div>
+                </div>
+            {% endif %}
+
+            {# Payment Information #}
+            {% if order.payment_method %}
+                <div class="order-section">
+                    <h2 class="section-title">{{ trans('pages.orders.payment_method') }}</h2>
+                    <p>{{ order.payment_method }}</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+

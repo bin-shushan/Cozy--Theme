@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="{{ user.language.code }}" dir="{{ user.language.dir }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    {# SEO Meta Tags #}
+    <title>{{ page.title }} - {{ store.name }}</title>
+    <meta name="description" content="{{ page.description }}">
+    <meta name="keywords" content="{{ page.keywords }}">
+    
+    {# Open Graph Meta Tags #}
+    <meta property="og:title" content="{{ page.title }}">
+    <meta property="og:description" content="{{ page.description }}">
+    <meta property="og:image" content="{{ store.logo }}">
+    <meta property="og:url" content="{{ page.url }}">
+    <meta property="og:type" content="website">
+    
+    {# Twitter Card Meta Tags #}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ page.title }}">
+    <meta name="twitter:description" content="{{ page.description }}">
+    <meta name="twitter:image" content="{{ store.logo }}">
+    
+    {# Favicon #}
+    <link rel="icon" type="image/png" href="{{ store.favicon }}">
+    
+    {# Fonts #}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    {# Theme CSS #}
+    {{ theme.link('app.css') }}
+    
+    {# Salla CSS Variables #}
+    <style>
+        :root {
+            --color-primary: {{ theme.color.primary }};
+            --color-secondary: {{ theme.color.secondary }};
+            --color-success: {{ theme.color.success }};
+            --color-danger: {{ theme.color.danger }};
+            --color-warning: {{ theme.color.warning }};
+            --color-info: {{ theme.color.info }};
+            --color-light: {{ theme.color.light }};
+            --color-dark: {{ theme.color.dark }};
+            --font-primary: {{ theme.font.primary }};
+            --font-secondary: {{ theme.font.secondary }};
+            --container-width: {{ theme.layout.container_width }};
+        }
+    </style>
+    
+    {# Custom CSS from admin #}
+    {{ theme.settings.custom_css|raw }}
+    
+    {# Salla Web Components #}
+    {{ twilight.head }}
+</head>
+
+<body class="{{ page.slug }}">
+    {# Header #}
+    {% include 'partials.header' %}
+    
+    {# Main Content #}
+    <main id="main-content" class="main-content">
+        {% block content %}
+            {# Page specific content goes here #}
+        {% endblock %}
+    </main>
+    
+    {# Footer #}
+    {% include 'partials.footer' %}
+    
+    {# Cart Drawer #}
+    <salla-cart-drawer></salla-cart-drawer>
+    
+    {# Search Modal #}
+    <salla-search></salla-search>
+    
+    {# Product Quick View Modal #}
+    <salla-product-quickview></salla-product-quickview>
+    
+    {# Theme JavaScript #}
+    {{ theme.script('app.js') }}
+    
+    {# Custom JavaScript from admin #}
+    {{ theme.settings.custom_js|raw }}
+    
+    {# Salla Scripts #}
+    {{ twilight.footer }}
+</body>
+</html>
+
+

@@ -1,0 +1,65 @@
+{
+  "name": "My First Salla Theme",
+  "version": "1.0.0",
+  "description": "A modern and responsive Salla theme built with Twilight",
+  "author": {
+    "name": "Your Name",
+    "email": "your.email@example.com",
+    "url": "https://yourwebsite.com"
+  },
+  "support": {
+    "email": "support@example.com",
+    "url": "https://yourwebsite.com/support"
+  },
+  "preview": {
+    "home": "images/screenshots/home.png",
+    "product": "images/screenshots/product.png",
+    "cart": "images/screenshots/cart.png"
+  },
+  "thumbnail": "images/thumbnail.png",
+  "screenshots": [
+    "images/screenshots/home.png",
+    "images/screenshots/product.png",
+    "images/screenshots/cart.png",
+    "images/screenshots/checkout.png"
+  ],
+  "settings": {
+    "colors": {
+      "primary": "#4A90E2",
+      "secondary": "#7B68EE",
+      "success": "#28a745",
+      "danger": "#dc3545",
+      "warning": "#ffc107",
+      "info": "#17a2b8",
+      "light": "#f8f9fa",
+      "dark": "#343a40"
+    },
+    "fonts": {
+      "primary": "Cairo, sans-serif",
+      "secondary": "Roboto, sans-serif"
+    },
+    "layout": {
+      "container_width": "1200px",
+      "header_style": "default",
+      "footer_style": "default"
+    }
+  },
+  "features": [
+    "responsive",
+    "rtl_support",
+    "multi_language",
+    "seo_optimized",
+    "fast_loading",
+    "product_quick_view",
+    "wishlist",
+    "cart_drawer",
+    "search_autocomplete",
+    "product_reviews",
+    "social_sharing"
+  ],
+  "compatible_with": {
+    "salla_version": ">=2.0.0"
+  }
+}
+
+

@@ -1,0 +1,67 @@
+{% extends "layouts/master" %}
+
+{% block content %}
+<div class="page-customer-profile">
+    <div class="container">
+        {# Page Header #}
+        <div class="page-header">
+            <h1 class="page-title">{{ trans('pages.profile.title') }}</h1>
+        </div>
+
+        {# Customer Dashboard #}
+        <div class="customer-dashboard">
+            {# Sidebar Navigation #}
+            <aside class="customer-sidebar">
+                <nav class="customer-nav">
+                    <ul>
+                        <li class="active">
+                            <a href="{{ link('customer.profile') }}">
+                                <salla-icon name="user"></salla-icon>
+                                {{ trans('pages.profile.title') }}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ link('customer.orders') }}">
+                                <salla-icon name="shopping-bag"></salla-icon>
+                                {{ trans('pages.orders') }}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ link('customer.wishlist') }}">
+                                <salla-icon name="heart"></salla-icon>
+                                {{ trans('pages.profile.wishlist') }}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ link('customer.notifications') }}">
+                                <salla-icon name="bell"></salla-icon>
+                                {{ trans('pages.profile.notifications') }}
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </aside>
+
+            {# Profile Content #}
+            <div class="customer-content">
+                <div class="profile-card">
+                    <h2>{{ trans('pages.profile.personal_info') }}</h2>
+                    <salla-profile-form></salla-profile-form>
+                </div>
+
+                <div class="profile-card">
+                    <h2>{{ trans('pages.profile.addresses') }}</h2>
+                    <salla-addresses-list></salla-addresses-list>
+                </div>
+
+                <div class="profile-card">
+                    <h2>{{ trans('pages.profile.change_password') }}</h2>
+                    <salla-password-form></salla-password-form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+

@@ -1,0 +1,137 @@
+{% extends "layouts/master" %}
+
+{% block content %}
+<div class="page-cart">
+    <div class="container">
+        {# Page Header #}
+        <div class="page-header">
+            <h1 class="page-title">{{ trans('pages.cart.title') }}</h1>
+        </div>
+
+        {# Cart Content #}
+        <div class="cart-content">
+            {# Empty Cart Message #}
+            <salla-cart-empty class="empty-cart">
+                <div class="empty-cart-icon">
+                    <salla-icon name="shopping-cart" size="64"></salla-icon>
+                </div>
+                <h2>{{ trans('pages.cart.empty_cart') }}</h2>
+                <p>{{ trans('pages.cart.empty_cart_message') }}</p>
+                <a href="{{ link('pages.products') }}" class="btn btn-primary">
+                    {{ trans('common.continue_shopping') }}
+                </a>
+            </salla-cart-empty>
+
+            {# Cart Items #}
+            <div class="cart-items-wrapper">
+                <div class="cart-items">
+                    <table class="cart-table">
+                        <thead>
+                            <tr>
+                                <th>{{ trans('pages.cart.product') }}</th>
+                                <th>{{ trans('pages.cart.price') }}</th>
+                                <th>{{ trans('pages.cart.quantity') }}</th>
+                                <th>{{ trans('pages.cart.total') }}</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <salla-cart-items>
+                                {# Cart items will be rendered here by Salla component #}
+                            </salla-cart-items>
+                        </tbody>
+                    </table>
+
+                    {# Cart Actions #}
+                    <div class="cart-actions">
+                        <a href="{{ link('pages.products') }}" class="btn btn-outline-secondary">
+                            <salla-icon name="arrow-left"></salla-icon>
+                            {{ trans('common.continue_shopping') }}
+                        </a>
+                        
+                        <salla-button-clear-cart class="btn btn-outline-danger">
+                            {{ trans('pages.cart.clear_cart') }}
+                        </salla-button-clear-cart>
+                    </div>
+
+                    {# Coupon Section #}
+                    <div class="cart-coupon">
+                        <h3>{{ trans('pages.cart.have_coupon') }}</h3>
+                        <salla-coupon-form></salla-coupon-form>
+                    </div>
+                </div>
+
+                {# Cart Summary #}
+                <div class="cart-summary">
+                    <div class="summary-card">
+                        <h3 class="summary-title">{{ trans('pages.cart.order_summary') }}</h3>
+                        
+                        <div class="summary-content">
+                            {# Subtotal #}
+                            <div class="summary-row">
+                                <span>{{ trans('pages.cart.subtotal') }}</span>
+                                <salla-cart-subtotal></salla-cart-subtotal>
+                            </div>
+
+                            {# Shipping #}
+                            <div class="summary-row">
+                                <span>{{ trans('pages.cart.shipping') }}</span>
+                                <salla-cart-shipping></salla-cart-shipping>
+                            </div>
+
+                            {# Tax #}
+                            <div class="summary-row">
+                                <span>{{ trans('pages.cart.tax') }}</span>
+                                <salla-cart-tax></salla-cart-tax>
+                            </div>
+
+                            {# Discount #}
+                            <salla-cart-discount class="summary-row discount">
+                                <span>{{ trans('pages.cart.discount') }}</span>
+                                <span class="discount-amount"></span>
+                            </salla-cart-discount>
+
+                            {# Total #}
+                            <div class="summary-row summary-total">
+                                <strong>{{ trans('pages.cart.total') }}</strong>
+                                <strong><salla-cart-total></salla-cart-total></strong>
+                            </div>
+                        </div>
+
+                        {# Checkout Button #}
+                        <div class="summary-actions">
+                            <salla-button-checkout class="btn btn-primary btn-block btn-lg">
+                                {{ trans('pages.cart.proceed_to_checkout') }}
+                                <salla-icon name="arrow-right"></salla-icon>
+                            </salla-button-checkout>
+                        </div>
+
+                        {# Payment Methods #}
+                        <div class="payment-methods-preview">
+                            <salla-payment-methods></salla-payment-methods>
+                        </div>
+                    </div>
+
+                    {# Trust Badges #}
+                    <div class="trust-badges">
+                        <div class="trust-badge">
+                            <salla-icon name="shield-check"></salla-icon>
+                            <span>{{ trans('common.secure_payment') }}</span>
+                        </div>
+                        <div class="trust-badge">
+                            <salla-icon name="truck"></salla-icon>
+                            <span>{{ trans('common.fast_delivery') }}</span>
+                        </div>
+                        <div class="trust-badge">
+                            <salla-icon name="sync"></salla-icon>
+                            <span>{{ trans('common.easy_returns') }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+

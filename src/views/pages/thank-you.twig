@@ -1,0 +1,32 @@
+{% extends "layouts/master" %}
+
+{% block content %}
+<div class="page-thank-you">
+    <div class="container">
+        <div class="thank-you-content">
+            <div class="thank-you-icon">
+                <salla-icon name="check-circle" size="80"></salla-icon>
+            </div>
+            
+            <h1 class="thank-you-title">{{ trans('pages.thank_you.title') }}</h1>
+            <p class="thank-you-message">{{ trans('pages.thank_you.message') }}</p>
+            
+            <div class="order-details">
+                <h2>{{ trans('pages.thank_you.order_number') }}: <strong>{{ order.id }}</strong></h2>
+                <p>{{ trans('pages.thank_you.confirmation_email') }}</p>
+            </div>
+            
+            <div class="thank-you-actions">
+                <a href="{{ link('customer.orders') }}" class="btn btn-primary">
+                    {{ trans('pages.thank_you.view_orders') }}
+                </a>
+                <a href="{{ link('pages.index') }}" class="btn btn-outline-secondary">
+                    {{ trans('pages.thank_you.continue_shopping') }}
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+

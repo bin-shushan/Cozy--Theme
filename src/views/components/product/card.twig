@@ -1,0 +1,115 @@
+{# Product Card Component #}
+<div class="product-card" data-product-id="{{ product.id }}">
+    <div class="product-card-inner">
+        {# Product Image #}
+        <div class="product-card-image">
+            <a href="{{ product.url }}" title="{{ product.name }}">
+                <img 
+                    src="{{ product.image.url }}" 
+                    alt="{{ product.name }}" 
+                    loading="lazy"
+                    class="primary-image">
+                
+                {# Hover Image #}
+                {% if product.images|length > 1 %}
+                    <img 
+                        src="{{ product.images[1].url }}" 
+                        alt="{{ product.name }}" 
+                        loading="lazy"
+                        class="hover-image">
+                {% endif %}
+            </a>
+
+            {# Product Badges #}
+            <div class="product-badges">
+                {% if product.is_on_sale %}
+                    <span class="badge badge-sale">
+                        -{{ product.discount_percent }}%
+                    </span>
+                {% endif %}
+                {% if product.is_new %}
+                    <span class="badge badge-new">{{ trans('common.new') }}</span>
+                {% endif %}
+                {% if product.is_out_of_stock %}
+                    <span class="badge badge-out">{{ trans('common.out_of_stock') }}</span>
+                {% endif %}
+            </div>
+
+            {# Quick Actions #}
+            <div class="product-quick-actions">
+                {# Quick View #}
+                <salla-button-quickview 
+                    product-id="{{ product.id }}"
+                    class="quick-action-btn"
+                    title="{{ trans('common.quick_view') }}">
+                    <salla-icon name="eye"></salla-icon>
+                </salla-button-quickview>
+
+                {# Wishlist #}
+                <salla-button-wishlist 
+                    product-id="{{ product.id }}"
+                    class="quick-action-btn"
+                    title="{{ trans('common.add_to_wishlist') }}">
+                    <salla-icon name="heart"></salla-icon>
+                </salla-button-wishlist>
+            </div>
+        </div>
+
+        {# Product Info #}
+        <div class="product-card-info">
+            {# Product Category #}
+            {% if product.category %}
+                <a href="{{ product.category.url }}" class="product-category">
+                    {{ product.category.name }}
+                </a>
+            {% endif %}
+
+            {# Product Title #}
+            <h3 class="product-title">
+                <a href="{{ product.url }}" title="{{ product.name }}">
+                    {{ product.name }}
+                </a>
+            </h3>
+
+            {# Product Rating #}
+            {% if product.rating > 0 %}
+                <div class="product-rating">
+                    <salla-rating 
+                        rating="{{ product.rating }}" 
+                        reviews-count="{{ product.reviews_count }}"
+                        size="sm">
+                    </salla-rating>
+                </div>
+            {% endif %}
+
+            {# Product Price #}
+            <div class="product-price">
+                {% if product.is_on_sale %}
+                    <span class="price-old">{{ product.regular_price|money }}</span>
+                    <span class="price-new">{{ product.sale_price|money }}</span>
+                {% else %}
+                    <span class="price-current">{{ product.price|money }}</span>
+                {% endif %}
+            </div>
+
+            {# Add to Cart Button #}
+            <div class="product-actions">
+                {% if product.is_out_of_stock %}
+                    <button class="btn btn-secondary btn-block" disabled>
+                        {{ trans('common.out_of_stock') }}
+                    </button>
+                {% else %}
+                    <salla-button-add-to-cart 
+                        product-id="{{ product.id }}"
+                        product-status="{{ product.status }}"
+                        class="btn btn-primary btn-block">
+                        <salla-icon name="shopping-cart"></salla-icon>
+                        {{ trans('common.add_to_cart') }}
+                    </salla-button-add-to-cart>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+

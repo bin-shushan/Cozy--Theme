@@ -1,0 +1,36 @@
+{# Comments Component #}
+<div class="comments-component">
+    <h3 class="comments-title">{{ trans('common.comments') }}</h3>
+    
+    {# Comments List #}
+    <div class="comments-list">
+        {% if item.comments %}
+            {% for comment in item.comments %}
+                <div class="comment">
+                    <div class="comment-header">
+                        <div class="comment-author">
+                            <salla-icon name="user-circle" size="40"></salla-icon>
+                            <div>
+                                <strong>{{ comment.author.name }}</strong>
+                                <span class="comment-date">{{ comment.created_at|date('M d, Y') }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="comment-body">
+                        <p>{{ comment.content }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="no-comments">{{ trans('common.no_comments_yet') }}</p>
+        {% endif %}
+    </div>
+
+    {# Comment Form #}
+    <div class="comment-form">
+        <h4>{{ trans('common.leave_comment') }}</h4>
+        <salla-comment-form item-id="{{ item.id }}"></salla-comment-form>
+    </div>
+</div>
+
+

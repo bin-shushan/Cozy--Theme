@@ -1,0 +1,70 @@
+{% extends "layouts/master" %}
+
+{% block content %}
+<div class="page-blog">
+    <div class="container">
+        {# Page Header #}
+        <div class="page-header">
+            <h1 class="page-title">{{ trans('pages.blog') }}</h1>
+            <salla-breadcrumb></salla-breadcrumb>
+        </div>
+
+        {# Blog Posts Grid #}
+        <div class="blog-posts-grid">
+            {% if blog.posts %}
+                {% for post in blog.posts %}
+                    <article class="blog-card">
+                        <div class="blog-card-inner">
+                            <div class="blog-card-image">
+                                <a href="{{ post.url }}" title="{{ post.title }}">
+                                    <img src="{{ post.image }}" alt="{{ post.title }}" loading="lazy">
+                                </a>
+                            </div>
+                            <div class="blog-card-content">
+                                <div class="blog-meta">
+                                    <span class="blog-date">
+                                        <salla-icon name="calendar"></salla-icon>
+                                        {{ post.created_at|date('M d, Y') }}
+                                    </span>
+                                    {% if post.author %}
+                                        <span class="blog-author">
+                                            <salla-icon name="user"></salla-icon>
+                                            {{ post.author.name }}
+                                        </span>
+                                    {% endif %}
+                                </div>
+                                <h2 class="blog-title">
+                                    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                                </h2>
+                                <p class="blog-excerpt">{{ post.excerpt|truncate(200) }}</p>
+                                <a href="{{ post.url }}" class="blog-read-more">
+                                    {{ trans('common.read_more') }}
+                                    <salla-icon name="arrow-right"></salla-icon>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                {% endfor %}
+            {% else %}
+                <div class="no-posts">
+                    <salla-icon name="file-alt" size="64"></salla-icon>
+                    <h3>{{ trans('pages.no_posts_found') }}</h3>
+                </div>
+            {% endif %}
+        </div>
+
+        {# Pagination #}
+        {% if blog.posts %}
+            <div class="blog-pagination">
+                <salla-pagination 
+                    total="{{ blog.total }}"
+                    per-page="{{ blog.per_page }}"
+                    current-page="{{ blog.current_page }}">
+                </salla-pagination>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+

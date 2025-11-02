@@ -1,0 +1,184 @@
+{% extends "layouts/master" %}
+
+{% block content %}
+<div class="page-product-single">
+    <div class="container">
+        {# Breadcrumb #}
+        <nav class="breadcrumb">
+            <salla-breadcrumb></salla-breadcrumb>
+        </nav>
+
+        {# Product Details #}
+        <div class="product-details">
+            <div class="product-gallery">
+                {# Product Images #}
+                <salla-product-gallery 
+                    images="{{ product.images|json_encode }}"
+                    thumbnail-position="left">
+                </salla-product-gallery>
+                
+                {# Product Badges #}
+                {% if product.is_on_sale or product.is_new or product.is_out_of_stock %}
+                    <div class="product-badges">
+                        {% if product.is_on_sale %}
+                            <span class="badge badge-sale">{{ trans('common.sale') }}</span>
+                        {% endif %}
+                        {% if product.is_new %}
+                            <span class="badge badge-new">{{ trans('common.new') }}</span>
+                        {% endif %}
+                        {% if product.is_out_of_stock %}
+                            <span class="badge badge-out">{{ trans('common.out_of_stock') }}</span>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="product-info">
+                {# Product Title #}
+                <h1 class="product-title">{{ product.name }}</h1>
+                
+                {# Product Rating #}
+                <div class="product-rating">
+                    <salla-rating 
+                        rating="{{ product.rating }}" 
+                        reviews-count="{{ product.reviews_count }}">
+                    </salla-rating>
+                </div>
+
+                {# Product Price #}
+                <div class="product-price">
+                    {% if product.is_on_sale %}
+                        <span class="price-old">{{ product.regular_price|money }}</span>
+                        <span class="price-new">{{ product.sale_price|money }}</span>
+                        <span class="price-discount">{{ product.discount_percent }}%</span>
+                    {% else %}
+                        <span class="price-current">{{ product.price|money }}</span>
+                    {% endif %}
+                </div>
+
+                {# Product Description #}
+                <div class="product-description">
+                    {{ product.description|raw }}
+                </div>
+
+                {# Product Options #}
+                {% if product.has_options %}
+                    <div class="product-options">
+                        <salla-product-options 
+                            product-id="{{ product.id }}"
+                            options="{{ product.options|json_encode }}">
+                        </salla-product-options>
+                    </div>
+                {% endif %}
+
+                {# Quantity Selector #}
+                <div class="product-quantity">
+                    <label>{{ trans('common.quantity') }}</label>
+                    <salla-quantity-selector 
+                        max="{{ product.quantity }}"
+                        value="1">
+                    </salla-quantity-selector>
+                </div>
+
+                {# Add to Cart Button #}
+                <div class="product-actions">
+                    <salla-button-add-to-cart 
+                        product-id="{{ product.id }}"
+                        product-status="{{ product.status }}"
+                        class="btn btn-primary btn-lg">
+                        <salla-icon name="shopping-cart"></salla-icon>
+                        {{ trans('common.add_to_cart') }}
+                    </salla-button-add-to-cart>
+                    
+                    <salla-button-wishlist 
+                        product-id="{{ product.id }}"
+                        class="btn btn-outline-secondary">
+                        <salla-icon name="heart"></salla-icon>
+                    </salla-button-wishlist>
+                </div>
+
+                {# Product Meta #}
+                <div class="product-meta">
+                    {% if product.sku %}
+                        <div class="meta-item">
+                            <strong>{{ trans('common.sku') }}:</strong> {{ product.sku }}
+                        </div>
+                    {% endif %}
+                    
+                    {% if product.categories %}
+                        <div class="meta-item">
+                            <strong>{{ trans('common.categories') }}:</strong>
+                            {% for category in product.categories %}
+                                <a href="{{ category.url }}">{{ category.name }}</a>
+                                {% if not loop.last %}, {% endif %}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    
+                    {% if product.tags %}
+                        <div class="meta-item">
+                            <strong>{{ trans('common.tags') }}:</strong>
+                            {% for tag in product.tags %}
+                                <a href="{{ tag.url }}">{{ tag.name }}</a>
+                                {% if not loop.last %}, {% endif %}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                {# Share Product #}
+                <div class="product-share">
+                    <strong>{{ trans('common.share') }}:</strong>
+                    <salla-social-share 
+                        url="{{ product.url }}"
+                        title="{{ product.name }}">
+                    </salla-social-share>
+                </div>
+            </div>
+        </div>
+
+        {# Product Tabs #}
+        <div class="product-tabs">
+            <salla-tabs>
+                {# Additional Information #}
+                {% if product.additional_info %}
+                    <salla-tab-panel label="{{ trans('common.additional_info') }}">
+                        <div class="product-additional-info">
+                            {{ product.additional_info|raw }}
+                        </div>
+                    </salla-tab-panel>
+                {% endif %}
+
+                {# Reviews #}
+                <salla-tab-panel label="{{ trans('common.reviews') }} ({{ product.reviews_count }})">
+                    <salla-product-reviews 
+                        product-id="{{ product.id }}">
+                    </salla-product-reviews>
+                </salla-tab-panel>
+
+                {# Questions #}
+                <salla-tab-panel label="{{ trans('common.questions') }}">
+                    <salla-product-questions 
+                        product-id="{{ product.id }}">
+                    </salla-product-questions>
+                </salla-tab-panel>
+            </salla-tabs>
+        </div>
+
+        {# Related Products #}
+        {% if product.related_products %}
+            <section class="related-products section-padding">
+                <div class="section-header">
+                    <h2 class="section-title">{{ trans('pages.related_products') }}</h2>
+                </div>
+                
+                <div class="products-grid">
+                    {% for related_product in product.related_products|slice(0, 4) %}
+                        {% include 'components.product.card' with {product: related_product} %}
+                    {% endfor %}
+                </div>
+            </section>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

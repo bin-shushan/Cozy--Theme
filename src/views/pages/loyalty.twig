@@ -1,0 +1,18 @@
+{% extends "layouts/master" %}
+
+{% block content %}
+<div class="page-loyalty">
+    <div class="container">
+        {# Page Header #}
+        <div class="page-header">
+            <h1 class="page-title">{{ trans('pages.loyalty.title') }}</h1>
+            <p class="page-subtitle">{{ trans('pages.loyalty.subtitle') }}</p>
+        </div>
+
+        {# Loyalty Program #}
+        <salla-loyalty-program></salla-loyalty-program>
+    </div>
+</div>
+{% endblock %}
+
+

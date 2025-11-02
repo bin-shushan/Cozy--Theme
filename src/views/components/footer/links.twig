@@ -1,0 +1,47 @@
+{# Footer Links Component #}
+<div class="footer-links-section">
+    {# About Store #}
+    <div class="footer-column">
+        <h3 class="footer-title">{{ trans('common.about_us') }}</h3>
+        <div class="footer-logo">
+            <img src="{{ store.logo }}" alt="{{ store.name }}" loading="lazy">
+        </div>
+        <p class="footer-description">{{ store.description|truncate(150) }}</p>
+        
+        {# Social Links #}
+        <div class="footer-social">
+            <salla-social-links></salla-social-links>
+        </div>
+    </div>
+    
+    {# Quick Links #}
+    <div class="footer-column">
+        <h3 class="footer-title">{{ trans('common.quick_links') }}</h3>
+        <ul class="footer-links">
+            <li><a href="{{ link('pages.index') }}">{{ trans('pages.home') }}</a></li>
+            <li><a href="{{ link('product.index') }}">{{ trans('pages.products') }}</a></li>
+            <li><a href="{{ link('pages.about') }}">{{ trans('pages.about') }}</a></li>
+            <li><a href="{{ link('pages.contact') }}">{{ trans('pages.contact') }}</a></li>
+        </ul>
+    </div>
+    
+    {# Customer Service #}
+    <div class="footer-column">
+        <h3 class="footer-title">{{ trans('common.customer_service') }}</h3>
+        <ul class="footer-links">
+            <li><a href="{{ link('customer.profile') }}">{{ trans('pages.profile.title') }}</a></li>
+            <li><a href="{{ link('customer.orders') }}">{{ trans('pages.orders') }}</a></li>
+            <li><a href="{{ link('pages.privacy') }}">{{ trans('pages.privacy') }}</a></li>
+            <li><a href="{{ link('pages.terms') }}">{{ trans('pages.terms') }}</a></li>
+        </ul>
+    </div>
+    
+    {# Newsletter #}
+    <div class="footer-column">
+        <h3 class="footer-title">{{ trans('common.newsletter') }}</h3>
+        <p>{{ trans('common.newsletter_text') }}</p>
+        <salla-newsletter-form></salla-newsletter-form>
+    </div>
+</div>
+
+

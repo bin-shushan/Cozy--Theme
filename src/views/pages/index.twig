@@ -1,0 +1,194 @@
+{% extends "layouts/master" %}
+
+{% block content %}
+<div class="page-home">
+    {# Hero Slider #}
+    <section class="hero-section">
+        <salla-slider auto-play="true" interval="5000">
+            {% for banner in store.banners %}
+                <salla-slider-item>
+                    <img src="{{ banner.image }}" alt="{{ banner.title }}" loading="lazy">
+                    <div class="banner-content">
+                        <h2 class="banner-title">{{ banner.title }}</h2>
+                        <p class="banner-description">{{ banner.description }}</p>
+                        {% if banner.url %}
+                            <a href="{{ banner.url }}" class="btn btn-primary">{{ trans('common.shop_now') }}</a>
+                        {% endif %}
+                    </div>
+                </salla-slider-item>
+            {% endfor %}
+        </salla-slider>
+    </section>
+
+    {# Categories Section #}
+    <section class="categories-section section-padding">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">{{ trans('pages.categories') }}</h2>
+                <p class="section-subtitle">{{ trans('common.shop_by_category') }}</p>
+            </div>
+            
+            <div class="categories-grid">
+                {% for category in store.categories|slice(0, 6) %}
+                    <div class="category-card">
+                        <a href="{{ category.url }}">
+                            <div class="category-image">
+                                <img src="{{ category.image }}" alt="{{ category.name }}" loading="lazy">
+                            </div>
+                            <div class="category-info">
+                                <h3 class="category-name">{{ category.name }}</h3>
+                                <span class="category-count">{{ category.products_count }} {{ trans('common.products') }}</span>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    {# Featured Products #}
+    <section class="featured-products section-padding">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">{{ trans('pages.featured_products') }}</h2>
+                <p class="section-subtitle">{{ trans('common.discover_our_products') }}</p>
+            </div>
+            
+            <div class="products-grid">
+                {% for product in products.featured|slice(0, 8) %}
+                    {% include 'components.product.card' with {product: product} %}
+                {% endfor %}
+            </div>
+            
+            <div class="section-footer">
+                <a href="{{ link('product.index') }}" class="btn btn-outline-primary">
+                    {{ trans('common.view_all') }}
+                </a>
+            </div>
+        </div>
+    </section>
+
+    {# Special Offers #}
+    {% if products.on_sale %}
+        <section class="special-offers section-padding bg-light">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">{{ trans('pages.special_offers') }}</h2>
+                    <p class="section-subtitle">{{ trans('common.limited_time_offers') }}</p>
+                </div>
+                
+                <div class="products-slider">
+                    <salla-products-slider products="{{ products.on_sale|json_encode }}">
+                        {% for product in products.on_sale|slice(0, 10) %}
+                            {% include 'components.product.card' with {product: product} %}
+                        {% endfor %}
+                    </salla-products-slider>
+                </div>
+            </div>
+        </section>
+    {% endif %}
+
+    {# Brands Section #}
+    {% if store.brands %}
+        <section class="brands-section section-padding">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">{{ trans('pages.brands') }}</h2>
+                    <p class="section-subtitle">{{ trans('common.shop_by_brand') }}</p>
+                </div>
+                
+                <div class="brands-grid">
+                    {% for brand in store.brands|slice(0, 12) %}
+                        <div class="brand-card">
+                            <a href="{{ brand.url }}">
+                                <img src="{{ brand.logo }}" alt="{{ brand.name }}" loading="lazy">
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    {% endif %}
+
+    {# Latest Articles #}
+    {% if blog.posts %}
+        <section class="blog-section section-padding bg-light">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">{{ trans('pages.latest_articles') }}</h2>
+                    <p class="section-subtitle">{{ trans('common.read_our_blog') }}</p>
+                </div>
+                
+                <div class="blog-grid">
+                    {% for post in blog.posts|slice(0, 3) %}
+                        <article class="blog-card">
+                            <div class="blog-card-inner">
+                                <div class="blog-card-image">
+                                    <a href="{{ post.url }}" title="{{ post.title }}">
+                                        <img src="{{ post.image }}" alt="{{ post.title }}" loading="lazy">
+                                    </a>
+                                </div>
+                                <div class="blog-card-content">
+                                    <div class="blog-meta">
+                                        <span class="blog-date">
+                                            <salla-icon name="calendar"></salla-icon>
+                                            {{ post.created_at|date('M d, Y') }}
+                                        </span>
+                                    </div>
+                                    <h3 class="blog-title">
+                                        <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                                    </h3>
+                                    <p class="blog-excerpt">{{ post.excerpt|truncate(150) }}</p>
+                                    <a href="{{ post.url }}" class="blog-read-more">
+                                        {{ trans('common.read_more') }}
+                                        <salla-icon name="arrow-right"></salla-icon>
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+                    {% endfor %}
+                </div>
+                
+                <div class="section-footer">
+                    <a href="{{ link('blog.index') }}" class="btn btn-outline-primary">
+                        {{ trans('common.view_all_articles') }}
+                    </a>
+                </div>
+            </div>
+        </section>
+    {% endif %}
+
+    {# Features Section #}
+    <section class="features-section section-padding">
+        <div class="container">
+            <div class="features-grid">
+                <div class="feature-card">
+                    <salla-icon name="shipping-fast" size="48"></salla-icon>
+                    <h3>{{ trans('common.free_shipping') }}</h3>
+                    <p>{{ trans('common.free_shipping_text') }}</p>
+                </div>
+                
+                <div class="feature-card">
+                    <salla-icon name="shield-check" size="48"></salla-icon>
+                    <h3>{{ trans('common.secure_payment') }}</h3>
+                    <p>{{ trans('common.secure_payment_text') }}</p>
+                </div>
+                
+                <div class="feature-card">
+                    <salla-icon name="headset" size="48"></salla-icon>
+                    <h3>{{ trans('common.customer_support') }}</h3>
+                    <p>{{ trans('common.customer_support_text') }}</p>
+                </div>
+                
+                <div class="feature-card">
+                    <salla-icon name="sync" size="48"></salla-icon>
+                    <h3>{{ trans('common.easy_returns') }}</h3>
+                    <p>{{ trans('common.easy_returns_text') }}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}
+
+
